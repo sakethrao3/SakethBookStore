@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +23,9 @@ namespace SakethBookStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            //services.AddRazorPages();
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,16 +40,30 @@ namespace SakethBookStore
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
+
+            //app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            ///app.UseEndpoints(async endpoints =>
+            //{
+            //endpoints.MapRazorPages();
+            //endpoints.Map("/", async context =>
+            // {
+            //await context.Response.WriteAsync("Hello World!");
+
+            // });
+            // });
+            //
+            app.UseEndpoints(async endpoints =>
             {
-                endpoints.MapRazorPages();
+                //endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
             });
+            //
         }
     }
-}
+}  
+
